@@ -3,6 +3,9 @@ on:
   push:
     paths:
       - 'boat-mod/**'
+      - 'content.json'
+      - 'manifest.json'
+      - 'assets/**'
       - '.github/workflows/build-boat.yml'
   workflow_dispatch:
 jobs:
@@ -13,17 +16,18 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '6.0.x'
-      - name: Build
+      - name: Build code mod
         run: dotnet build boat-mod/LostIslandBoat.csproj -c Release
-      - name: Package mod
+      - name: Package both mods
         run: |
+          mkdir -p package/LostIsland/assets
+          cp manifest.json content.json package/LostIsland/
+          cp assets/main-island.tmx package/LostIsland/assets/
           mkdir -p package/LostIslandBoat
           cp boat-mod/manifest.json package/LostIslandBoat/
           cp boat-mod/bin/Release/net6.0/LostIslandBoat.dll package/LostIslandBoat/
-          mkdir -p package/LostIslandBoat/assets
-          cp boat-mod/assets/boat.png package/LostIslandBoat/assets/
           cd package
-          zip -r ../Lost-Island-Boat-Android.zip LostIslandBoat
+          zip -r ../Lost-Island-Boat-Android.zip LostIsland LostIslandBoat
       - uses: actions/upload-artifact@v4
         with:
           name: Lost-Island-Boat-Android
