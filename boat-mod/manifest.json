@@ -1,0 +1,9 @@
+{
+  "Name": "Lost Island Boat",
+  "Author": "kuunpaul-coder",
+  "Version": "0.1.0",
+  "Description": "Adds a visible passenger boat and a route-selection menu for Lost Island.",
+  "UniqueID": "Strict.LostIslandBoat",
+  "EntryDll": "LostIslandBoat.dll",
+  "MinimumApiVersion": "4.0.0"
+}
