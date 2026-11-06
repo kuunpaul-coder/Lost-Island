@@ -1,4 +1,24 @@
 {
-  "Format": 2,
-  "Changes": []
+  "Format": "2.9.0",
+  "Changes": [
+    {
+      "LogName": "Load Lost Island map",
+      "Action": "Load",
+      "Target": "Maps/{{ModId}}_MainIsland",
+      "FromFile": "assets/main-island.tmx"
+    },
+    {
+      "LogName": "Register Lost Island location",
+      "Action": "EditData",
+      "Target": "Data/Locations",
+      "Entries": {
+        "{{ModId}}_MainIsland": {
+          "DisplayName": "Lost Island",
+          "CreateOnLoad": {
+            "MapPath": "Maps/{{ModId}}_MainIsland"
+          }
+        }
+      }
+    }
+  ]
 }
