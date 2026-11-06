@@ -19,6 +19,22 @@
           }
         }
       }
+    },
+    {
+      "LogName": "Boat route from the Beach to Lost Island",
+      "Action": "EditMap",
+      "Target": "Maps/Beach",
+      "AddWarps": [
+        "88 20 {{ModId}}_MainIsland 24 28"
+      ]
+    },
+    {
+      "LogName": "Return route from Lost Island to the Beach",
+      "Action": "EditMap",
+      "Target": "Maps/{{ModId}}_MainIsland",
+      "AddWarps": [
+        "24 29 Beach 88 21"
+      ]
     }
   ]
 }
