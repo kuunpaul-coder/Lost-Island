@@ -1,0 +1,31 @@
+name: Build Lost Island Boat
+on:
+  push:
+    paths:
+      - 'boat-mod/**'
+      - '.github/workflows/build-boat.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+      - name: Build
+        run: dotnet build boat-mod/LostIslandBoat.csproj -c Release
+      - name: Package mod
+        run: |
+          mkdir -p package/LostIslandBoat
+          cp boat-mod/manifest.json package/LostIslandBoat/
+          cp boat-mod/bin/Release/net6.0/LostIslandBoat.dll package/LostIslandBoat/
+          mkdir -p package/LostIslandBoat/assets
+          cp boat-mod/assets/boat.png package/LostIslandBoat/assets/
+          cd package
+          zip -r ../Lost-Island-Boat-Android.zip LostIslandBoat
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Lost-Island-Boat-Android
+          path: Lost-Island-Boat-Android.zip
+          if-no-files-found: error
